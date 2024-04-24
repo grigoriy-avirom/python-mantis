@@ -11,9 +11,9 @@ class SignupHelper:
         wd.get(self.app.base_url + "/signup_page.php")
         wd.find_element_by_name("username").send_keys(username)
         wd.find_element_by_name("email").send_keys(email)
-        wd.find_element_by_xpath("//input[@value='Signup']").click()  # на почтовый сервер отправляется письмо
+        wd.find_element_by_xpath("//input[@value='Signup']").click()
 
-        mail = self.app.mail.get_mail(username, password, "[MantisBT] Account registration")
+        mail = self.app.mail.get_mail(username, password,"[MantisBT] Account registration")
         url = self.extract_confirmation_url(mail)
 
         wd.get(url)
@@ -22,4 +22,4 @@ class SignupHelper:
         wd.find_element_by_xpath("//input[@value='Update User']").click()
 
     def extract_confirmation_url(self, text):
-        return re.search("http://.*$", str(text), re.MULTILINE).group(0)
+        return re.search("http://.*$", text, re.MULTILINE).group(0)
