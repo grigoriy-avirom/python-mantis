@@ -42,9 +42,8 @@ class ProjectHelper:
         self.open_projects_page()
         l = []
         number = len(wd.find_elements_by_xpath('//table[@class="width100"][2]//tbody//tr'))
-        for n in range(3, number+1):
-            id = wd.find_element_by_xpath(f'//table[@class="width100"][2]//tbody//tr[{n}]//td//a').get_attribute(
-                'href')
+        for n in range(3, number + 1):
+            id = wd.find_element_by_xpath(f'//table[@class="width100"][2]//tbody//tr[{n}]//td//a').get_attribute('href')
             id = str(id).split("=")[1]
             name = wd.find_element_by_xpath(f'//table[@class="width100"][2]//tbody//tr[{n}]//td//a').text
             status = wd.find_element_by_xpath(f'//table[@class="width100"][2]//tbody//tr[{n}]//td[2]').text
@@ -52,7 +51,7 @@ class ProjectHelper:
             view_status = wd.find_element_by_xpath(f'//table[@class="width100"][2]//tbody//tr[{n}]//td[4]').text
             description = wd.find_element_by_xpath(f'//table[@class="width100"][2]//tbody//tr[{n}]//td[5]').text
             l.append(Project(id=id, name=name, status=status, inherit_global_cat=inherit_global_cat,
-                                    view_status=view_status, description=description))
+                             view_status=view_status, description=description))
         return list(l)
 
     def delete_project_by_index(self, index):
